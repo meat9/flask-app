@@ -38,7 +38,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: me91at/gates:latest
+          repository: me91at/gates
           tag_with_ref: true
 
   deploy:
@@ -53,9 +53,9 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.PASSPHRASE }} # если ваш ssh-ключ защищен фразой-паролем
         script: |
-          sudo docker pull me91at/gates:latest
+          sudo docker pull me91at/gates
           sudo docker stop $(sudo docker ps -a -q)
-          sudo docker run --rm -d -p 5000:5000 me91at/gates:latest
+          sudo docker run --rm -d -p 5000:5000 me91at/gates
 
   send_message:
     runs-on: ubuntu-latest
